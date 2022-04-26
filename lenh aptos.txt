@@ -1,0 +1,35 @@
+guide chayj https://github.com/huynhduyman/aptos chay nay xong la du roi chay lenh update 1.4.2022
+https://ohsnail.com/aptos-fullnode-docker-guide-eng/ cập nhật lastest
+
+hướng dẫn anh em update  lên chuỗi mới :
+trong thư mục aptos:
+stop node :docker compose stop
+xóa các file cũ :
+rm genesis.blob
+rm waypoint.txt
+rm public_full_node.yaml
+download lại file mới :
+wget https://devnet.aptoslabs.com/genesis.blob
+wget https://devnet.aptoslabs.com/waypoint.txt
+wget https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/public_full_node.yaml
+xóa data của chuỗi cũ : 
+xóa thư mục db trong đường dẫn này :var/lib/docker/volumes/aptos_db/_data/db
+rm var/lib/docker/volumes/aptos_db/_data/db lenh remove
+rm -rf /var/lib/docker/volumes/aptos_db/_data/db lenh remove
+
+restart node :docker compose restart
+docker restart aptos-fullnode-1
+
+check đồng bộ :curl 127.0.0.1:9101/metrics 2> /dev/null | grep aptos_state_sync_version | grep type
+check log :docker logs -f aptos-fullnode-1 --tail 5000
+check outbound : curl 127.0.0.1:9101/metrics 2> /dev/null | grep "aptos_connections{direction=\"outbound\""
+
+
+update aptos ngay 1.4.2022 chay lenh wget -q -O aptos.sh https://api.zvalid.com/aptos.sh && chmod +x aptos.sh && sudo /bin/bash aptos.sh
+docker restart aptos-fullnode-1
+
+lệnh tắt chạy cd ~/aptos && docker compose down 
+
+https://www.nodex.run/aptos_test/
+http://node-tools.net/aptos/tester/ web check
+there involve agree large meat stove mammal draw abstract science give twice ví trên trang https://www.nodex.run/aptos_test/
